@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Source Sans Pro', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background: radial-gradient(circle, #d4f2f5 0%, #81ecec 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    color: #2f3542; /* Dark text */
+}
+
+html {
+    font-size: 16px; /* Base font size */
+}
+
+.wrapper {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    background: #ffffff; /* White background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(47, 53, 66, 0.5); /* Dark shadow */
+}
+
+.container {
+    width: 50vmin;
+    height: 50vmin;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2vmin;
+    background: radial-gradient(circle, #d4f2f5 0%, #81ecec 100%);
+    border-radius: 10px;
+    padding: 2vmin;
+}
+
+.button-option {
+    background: #ffffff; /* White background */
+    height: 13vmin;
+    width: 13vmin;
+    border: 2px solid #2f3542; /* Dark border */
+    border-radius: 8px;
+    font-size: 7vmin;
+    color: #2f3542; /* Dark text */
+    box-shadow: 0 0 15px rgba(47, 53, 66, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button-option:hover {
+    background: #2f3542; /* Dark background on hover */
+    color: #ffffff; /* White text on hover */
+}
+
+#restart {
+    font-size: 1.3em;
+    padding: 1em;
+    border-radius: 8px;
+    background-color: #2f3542; /* Dark background */
+    color: #ffffff; /* White text */
+    border: none;
+    margin: 1.5em auto 0 auto;
+    display: block;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#restart:hover {
+    background-color: #00cc00; /* Greenish hover color */
+}
+
+.popup {
+    background: rgba(0, 0, 0, 0.9);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    z-index: 2;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1em;
+    font-size: 12vmin; /* Larger font size for popup */
+    color: #2f3542; /* Dark text */
+}
+
+#new-game {
+    font-size: 0.3em;
+    padding: 0.5em 1em;
+    background-color: #2f3542; /* Dark background */
+    color: #ffffff; /* White text */
+    border-radius: 0.2em;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#new-game:hover {
+    background-color: #2f3542; /* Dark hover background */
+}
+
+#message {
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #2f3542; /* Dark text */
+    text-align: center;
+    font-size: 0.5em;
+}
+
+.popup.hide {
+    display: none;
+}
