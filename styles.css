@@ -1,121 +1,156 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
 * {
     margin: 0;
     padding: 0;
-    font-family: 'Source Sans Pro', sans-serif;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
-    background: radial-gradient(circle, #d4f2f5 0%, #81ecec 100%);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    overflow: hidden;
-    color: #2f3542; /* Dark text */
+    min-height: 100vh;
+    background-color: #f0f0f0; /* Pleasant background color */
+    background-size: cover;
+    background-position: center;
 }
 
-html {
-    font-size: 16px; /* Base font size */
-}
-
-.wrapper {
+.background {
     position: absolute;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
-    text-align: center;
-    background: #ffffff; /* White background */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(47, 53, 66, 0.5); /* Dark shadow */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, #0a0a0a 0%, #0a0a0a 100%);
+    opacity: 0.7; /* Semi-transparent overlay */
 }
 
 .container {
-    width: 50vmin;
-    height: 50vmin;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2vmin;
-    background: radial-gradient(circle, #d4f2f5 0%, #81ecec 100%);
-    border-radius: 10px;
-    padding: 2vmin;
+    position: relative;
+    z-index: 1; /* Ensure content appears above the background */
+    text-align: center; /* Center align content */
+    width: 400px;
+    max-width: 90%;
+    height: auto;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 20px;
+    color: #fff;
 }
 
-.button-option {
-    background: #ffffff; /* White background */
-    height: 13vmin;
-    width: 13vmin;
-    border: 2px solid #2f3542; /* Dark border */
-    border-radius: 8px;
-    font-size: 7vmin;
-    color: #2f3542; /* Dark text */
-    box-shadow: 0 0 15px rgba(47, 53, 66, 0.5);
-    cursor: pointer;
-    transition: all 0.3s ease;
+h1 {
+    color: #fff; /* Text color */
 }
 
-.button-option:hover {
-    background: #2f3542; /* Dark background on hover */
-    color: #ffffff; /* White text on hover */
-}
-
-#restart {
-    font-size: 1.3em;
-    padding: 1em;
-    border-radius: 8px;
-    background-color: #2f3542; /* Dark background */
-    color: #ffffff; /* White text */
-    border: none;
-    margin: 1.5em auto 0 auto;
-    display: block;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-#restart:hover {
-    background-color: #00cc00; /* Greenish hover color */
-}
-
-.popup {
-    background: rgba(0, 0, 0, 0.9);
-    height: 100%;
+.search-box {
+    position: relative;
     width: 100%;
-    position: absolute;
+    height: 55px;
     display: flex;
-    z-index: 2;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 1em;
-    font-size: 12vmin; /* Larger font size for popup */
-    color: #2f3542; /* Dark text */
+    margin-bottom: 20px;
 }
 
-#new-game {
-    font-size: 0.3em;
-    padding: 0.5em 1em;
-    background-color: #2f3542; /* Dark background */
-    color: #ffffff; /* White text */
-    border-radius: 0.2em;
+.search-box i {
+    position: absolute;
+    left: 10px;
+    font-size: 28px;
+    color: #fff;
+}
+
+.search-box input {
+    width: calc(100% - 50px);
+    height: 100%;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    outline: none;
+    border-radius: 10px;
+    font-size: 18px;
+    color: #fff;
+    padding: 0 20px;
+}
+
+.search-box input::placeholder {
+    color: #fff;
+    text-transform: capitalize;
+}
+
+.search-box button {
+    width: 50px;
+    height: 100%;
+    background: transparent;
     border: none;
+    outline: none;
+    font-size: 24px;
+    color: #fff;
     cursor: pointer;
-    transition: background-color 0.3s;
 }
 
-#new-game:hover {
-    background-color: #2f3542; /* Dark hover background */
-}
-
-#message {
-    font-family: 'Source Sans Pro', sans-serif;
-    color: #2f3542; /* Dark text */
+.weather-box {
     text-align: center;
-    font-size: 0.5em;
+    margin: 40px 0;
 }
 
-.popup.hide {
-    display: none;
+.weather-box img {
+    width: 60%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.weather-box .temperature {
+    font-size: 48px;
+    font-weight: 600;
+    margin: 20px 0;
+    color: #fff;
+}
+
+.weather-box .temperature span {
+    font-size: 20px;
+    font-weight: 400;
+    margin-left: 4px;
+    color: #fff;
+}
+
+.weather-box .description {
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: capitalize;
+    color: #fff;
+}
+
+.weather-details {
+    display: flex;
+    justify-content: center; /* Center align items horizontally */
+    margin-top: 40px;
+}
+
+.weather-details .humidity,
+.weather-details .wind {
+    display: flex;
+    align-items: center;
+    margin: 0 20px;
+}
+
+.weather-details i {
+    font-size: 24px;
+    margin-right: 10px;
+    color: #fff;
+}
+
+.weather-details span {
+    font-size: 18px;
+    font-weight: 400;
+    color: #fff;
+}
+
+.weather-details p {
+    font-size: 14px;
+    font-weight: 400;
+    color: #fff;
 }

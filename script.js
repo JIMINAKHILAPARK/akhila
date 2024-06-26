@@ -1,108 +1,58 @@
-let btnRef = document.querySelectorAll(".button-option");
-let popupRef = document.querySelector(".popup");
-let newgameBtn = document.getElementById("new-game");
-let restartBtn = document.getElementById("restart");
-let msgRef = document.getElementById("message");
-//Winning Pattern Array
-let winningPattern = [
-  [0, 1, 2],
-  [0, 3, 6],
-  [2, 5, 8],
-  [6, 7, 8],
-  [3, 4, 5],
-  [1, 4, 7],
-  [0, 4, 8],
-  [2, 4, 6],
-];
-//Player 'X' plays first
-let xTurn = true;
-let count = 0;
+const container =  document.querySelector('.container');
+const search =  document.querySelector('.search-box button');
+const weatherBox =  document.querySelector('.weather-box');
+const weatherDetails =  document.querySelector('.weather-details');
 
-//Disable All Buttons
-const disableButtons = () => {
-  btnRef.forEach((element) => (element.disabled = true));
-  //enable popup
-  popupRef.classList.remove("hide");
-};
+search.addEventListener('click', () => { 
 
-//Enable all buttons (For New Game and Restart)
-const enableButtons = () => {
-  btnRef.forEach((element) => {
-    element.innerText = "";
-    element.disabled = false;
-  });
-  //disable popup
-  popupRef.classList.add("hide");
-};
+    const APIKey ='40d01644c1cd85953799360cf29d260d';
+    const city = document.querySelector('.search-box input').value;
 
-//This function is executed when a player wins
-const winFunction = (letter) => {
-  disableButtons();
-  if (letter == "X") {
-    msgRef.innerHTML = "'X' Wins";
-  } else {
-    msgRef.innerHTML = " 'O' Wins";
-  }
-};
+    if (city == '')
+    return;
 
-//Function for draw
-const drawFunction = () => {
-  disableButtons();
-  msgRef.innerHTML = "&#x1F60E; <br> It's a Draw";
-};
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${APIKey}`).then(response => response.json()).then(json => {
 
-//New Game
-newgameBtn.addEventListener("click", () => {
-  count = 0;
-  enableButtons();
+        const image = document.querySelector('.weather-box img');
+        const temperature = document.querySelector('.weather-box .temperature');
+        const description = document.querySelector('.weather-box .description');
+        const humidity = document.querySelector('.weather-details .humidity span');
+        const wind = document.querySelector('.weather-details .wind span');
+
+        switch (json.weather[0].main) {
+            case 'Clear':
+                image.src = 'https://st4.depositphotos.com/1005844/30671/i/450/depositphotos_306719508-stock-photo-blue-sky-sun-background.jpg';  
+                break;
+
+             case 'Rain':
+                image.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZBCVB9aM5mxVNbJBQhbmUmdcT7kK0KG_qXw&s';
+                break;
+
+             case 'Snow':
+                image.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZBCVB9aM5mxVNbJBQhbmUmdcT7kK0KG_qXw&s';
+                break;  
+                  
+            case 'Clouds':
+                image.src = 'https://www.treehugger.com/thmb/z9XWueIDAUQI6QvXfCR6JyuFzl8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__mnn__images__2018__08__CollectionOfCloudsAgainstABlueSky-8cae9f3109d14dcf98d9facc5775222f.jpg';
+                break;
+
+            case 'Mist':
+                image.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDY2xKrn_lNdmkkeRPxdtx1gZ6nmaGx6R-pw&s';
+                break;
+
+            case 'Haze':
+                image.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDY2xKrn_lNdmkkeRPxdtx1gZ6nmaGx6R-pw&s';
+                break;
+        
+            default:
+               image.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPLojkcoNjwnj0atFGRJqIqdMtnz4HAM5Mrkb9t1mbmFn24bc0Ms8itbXsHCDp-badwyo&usqp=CAU';
+               break;
+        }
+          temperature.innerHTML = `${parseInt(json.main.temp)}<span>°c</span>`;
+          description.innerHTML = `${json.weather[0].description}`;
+          humidity.innerHTML = `${(json.main.humidity)}%`;
+          wind.innerHTML = `${parseInt(json.wind.speed)}Km/hr`;
+
+
+    });
 });
-restartBtn.addEventListener("click", () => {
-  count = 0;
-  enableButtons();
-});
-
-//Win Logic
-const winChecker = () => {
-  //Loop through all win patterns
-  for (let i of winningPattern) {
-    let [element1, element2, element3] = [
-      btnRef[i[0]].innerText,
-      btnRef[i[1]].innerText,
-      btnRef[i[2]].innerText,
-    ];
-    //Check if elements are filled
-    //If 3 empty elements are same and would give win as would
-    if (element1 != "" && (element2 != "") & (element3 != "")) {
-      if (element1 == element2 && element2 == element3) {
-        //If all 3 buttons have same values then pass the value to winFunction
-        winFunction(element1);
-      }
-    }
-  }
-};
-
-//Display X/O on click
-btnRef.forEach((element) => {
-  element.addEventListener("click", () => {
-    if (xTurn) {
-      xTurn = false;
-      //Display X
-      element.innerText = "X";
-      element.disabled = true;
-    } else {
-      xTurn = true;
-      //Display Y
-      element.innerText = "O";
-      element.disabled = true;
-    }
-    //Increment count on each click
-    count += 1;
-    if (count == 9) {
-      drawFunction();
-    }
-    //Check for win on every click
-    winChecker();
-  });
-});
-//Enable Buttons and disable popup on page load
-window.onload = enableButtons;
